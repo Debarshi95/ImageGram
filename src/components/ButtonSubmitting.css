@@ -1,0 +1,22 @@
+.buttonsubmitting__root {
+  width: 100%;
+  padding: 10px;
+  background: #fafafa;
+  border: 1.8px solid #b8b8b8;
+  border-radius: 4px;
+  margin-top: 6px;
+  display: flex;
+  justify-content: center;
+}
+
+.buttonsubmitting__root > button {
+  background: transparent;
+  width: 100%;
+  outline: none;
+  border: 0;
+}
+
+.buttonsubmitting__spinner {
+  width: 20px !important;
+  height: 20px !important;
+}

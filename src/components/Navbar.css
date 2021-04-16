@@ -1,0 +1,19 @@
+.navbar__root {
+  display: flex;
+  padding: 1rem 0;
+  justify-content: space-between;
+  background-color: green;
+}
+
+.navbar__root a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 600;
+  padding: 0 1rem;
+}
+
+@media screen and (min-width: 768px) {
+  .navbar__root {
+    padding: 1rem 4rem;
+  }
+}
