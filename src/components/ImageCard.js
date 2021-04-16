@@ -4,7 +4,9 @@ import "./ImageCard.css";
 function ImageCard({ image }) {
   return (
     <div className="imagecard__root">
-      <img src={image.url} alt="" />
+      <h3>{image.caption}</h3>
+      <img src={image.url} alt={image.caption} />
+      <h5>{image.caption}</h5>
     </div>
   );
 }

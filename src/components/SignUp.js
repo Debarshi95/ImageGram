@@ -34,6 +34,10 @@ function SignUp() {
       if (usernameExists) {
         setSubmitting(false);
         setError("Username taken. Please try another username");
+        setInput({
+          ...input,
+          password: "",
+        });
       } else {
         const newUser = await auth.createUserWithEmailAndPassword(
           input.email,
@@ -44,27 +48,26 @@ function SignUp() {
           displayName: input.fullname,
         });
 
-        console.log(newUser);
-
         const res = await saveUser(
+          newUser.user.uid,
           input.username,
           input.fullname,
           newUser.user.email
         );
-        // if (res.id) {
-        //   history.push(ROUTES.HOME);
-        // }
+        if (res.id) {
+          history.push(ROUTES.HOME);
+        }
       }
     } catch (err) {
       setSubmitting(false);
+      setInput({
+        ...input,
+        password: "",
+      });
       setError(err.message);
     }
-
-    setInput({
-      ...input,
-      password: "",
-    });
   };
+
   return (
     <>
       <Navbar />

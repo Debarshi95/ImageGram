@@ -7,7 +7,7 @@ import { useAuth } from "./hooks/useAuth";
 function App() {
   const { setUser } = useAuth();
   React.useEffect(() => {
-    auth.onAuthStateChanged((user) => {
+    const unsub = auth.onAuthStateChanged((user) => {
       if (user) {
         console.log(user);
         setUser(user);
@@ -16,6 +16,7 @@ function App() {
         setUser(null);
       }
     });
+    return () => unsub();
   }, [setUser]);
   return (
     <div className="app__root">

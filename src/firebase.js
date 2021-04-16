@@ -25,8 +25,9 @@ const checkUserNameExists = async (username) => {
     .get();
   return res.docs.length > 0;
 };
-const saveUser = async (username, fullname, email) => {
+const saveUser = async (uid, username, fullname, email) => {
   const res = await firestore.collection("users").add({
+    uid,
     username,
     fullname,
     email,

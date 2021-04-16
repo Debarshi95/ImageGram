@@ -3,6 +3,7 @@ import * as ROUTES from "./constant/routes";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import ImageUpload from "./components/ImageUpload";
 import { useAuth } from "./hooks/useAuth";
+import Loader from "./components/Loader";
 
 const LazyHome = React.lazy(() => import("./components/Home"));
 const LazySignIn = React.lazy(() => import("./components/SignIn"));
@@ -13,7 +14,7 @@ function MainRouter() {
   const { user } = useAuth();
   return (
     <BrowserRouter>
-      <Suspense fallback={<h2>Loading..</h2>}>
+      <Suspense fallback={<Loader />}>
         <Route>
           <Switch>
             <Route exact path={ROUTES.HOME} component={LazyHome} />
@@ -23,18 +24,8 @@ function MainRouter() {
                 user ? <ImageUpload /> : <Redirect to={ROUTES.HOME} />
               }
             />
-            <Route
-              path={ROUTES.SIGN_IN}
-              render={() =>
-                user ? <Redirect to={ROUTES.HOME} /> : <LazySignIn />
-              }
-            />
-            <Route
-              path={ROUTES.SIGN_UP}
-              render={() =>
-                user ? <Redirect to={ROUTES.HOME} /> : <LazySignUp />
-              }
-            />
+            <Route path={ROUTES.SIGN_IN} component={LazySignIn} />
+            <Route path={ROUTES.SIGN_UP} component={LazySignUp} />
             <Route
               path={ROUTES.USER}
               render={() =>

@@ -1,10 +1,12 @@
 import React from "react";
 import { storage, firestore, timeStamp } from "../firebase";
+import { useAuth } from "./useAuth";
 
 function useStorage(file, caption) {
   const [progress, setProgress] = React.useState();
   const [error, setError] = React.useState("");
   const [url, setUrl] = React.useState("");
+  const { user } = useAuth();
 
   React.useEffect(() => {
     if (file !== null) {
@@ -21,13 +23,14 @@ function useStorage(file, caption) {
             firestore.collection("uploads").add({
               caption: caption,
               url: downloadUrl,
+              uploadedBy: user.uid,
               createdAt: timeStamp(),
             });
           });
         }
       );
     }
-  }, [file, caption]);
+  }, [file, caption, user]);
   return {
     progress,
     error,
