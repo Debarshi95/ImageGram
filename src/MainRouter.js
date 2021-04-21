@@ -4,6 +4,7 @@ import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import ImageUpload from "./components/ImageUpload";
 import { useAuth } from "./hooks/useAuth";
 import Loader from "./components/Loader";
+import NotFound from "./pages/NotFound";
 
 const LazyHome = React.lazy(() => import("./pages/Home"));
 const LazySignIn = React.lazy(() => import("./pages/SignIn"));
@@ -25,6 +26,7 @@ function MainRouter() {
             />
             <Route path={ROUTES.SIGN_IN} component={LazySignIn} />
             <Route path={ROUTES.SIGN_UP} component={LazySignUp} />
+            <Route component={NotFound} />
           </Switch>
         </Route>
       </Suspense>
