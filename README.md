@@ -1,6 +1,6 @@
 ## ImageGram
 
-[Demo]("https://debarshib-imagegram.netlify.app")
+[Demo](https://debarshib-imagegram.netlify.app)
 
 #### Features
 
