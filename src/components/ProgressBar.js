@@ -7,11 +7,7 @@ function ProgressBar({ progress, url, setFile, setUpload }) {
       setUpload(false);
     }
   }, [progress, setFile, url, setUpload]);
-  return (
-    <div>
-      <progress value={progress} />
-    </div>
-  );
+  return <progress value={progress} />;
 }
 
 export default ProgressBar;

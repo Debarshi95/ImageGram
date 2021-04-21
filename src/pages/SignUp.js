@@ -1,10 +1,10 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
-import Navbar from "./Navbar";
+import Navbar from "../components/Navbar";
 import * as ROUTES from "../constant/routes";
 import "./SignUp.css";
 import { auth, checkUserNameExists, saveUser } from "../firebase";
-import ButtonSubmitting from "./ButtonSubmitting";
+import ButtonSubmitting from "../components/ButtonSubmitting";
 
 function SignUp() {
   const [input, setInput] = React.useState({
@@ -48,15 +48,14 @@ function SignUp() {
           displayName: input.fullname,
         });
 
-        const res = await saveUser(
+        await saveUser(
           newUser.user.uid,
           input.username,
           input.fullname,
           newUser.user.email
         );
-        if (res.id) {
-          history.push(ROUTES.HOME);
-        }
+
+        history.push(ROUTES.HOME);
       }
     } catch (err) {
       setSubmitting(false);
@@ -73,7 +72,8 @@ function SignUp() {
       <Navbar />
       <div className="signup__root">
         <div className="signup__form">
-          <h3>Sign Up</h3>
+          <h2>Sign Up</h2>
+          <p>Sign up to get started</p>
           <form autoComplete="off" onSubmit={setupSignUp}>
             <input
               type="text"
@@ -111,6 +111,7 @@ function SignUp() {
               submitting={submitting}
               disabled={disabled}
               text="Sign up"
+              handler={setupSignUp}
             />
           </form>
           {error && <p className="signup__error">{error}</p>}

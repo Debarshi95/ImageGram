@@ -24,7 +24,7 @@ function SignOutDialog({ open, setOpen }) {
         <DialogTitle id="alert-dialog-title">Logout?</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Are you sure you want to logout?
+            Do you want to logout?
           </DialogContentText>
         </DialogContent>
         <DialogActions>

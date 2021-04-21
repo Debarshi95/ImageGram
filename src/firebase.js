@@ -25,15 +25,40 @@ const checkUserNameExists = async (username) => {
     .get();
   return res.docs.length > 0;
 };
+
 const saveUser = async (uid, username, fullname, email) => {
-  const res = await firestore.collection("users").add({
-    uid,
+  const res = await firestore.collection("users").doc(uid).set({
     username,
     fullname,
     email,
     createdAt: timeStamp(),
   });
-  console.log(res);
+
   return res;
 };
-export { storage, firestore, timeStamp, auth, saveUser, checkUserNameExists };
+
+const updatePostLikes = async (imageId, users) => {
+  await firestore.collection("uploads").doc(imageId).update({
+    likedBy: users,
+  });
+};
+
+const addCommentToPost = async (imageId, userId, comment) => {
+  await firestore.collection("comments").add({
+    image: firestore.collection("uploads").doc(imageId),
+    comment,
+    user: firestore.collection("users").doc(userId),
+    createdAt: timeStamp(),
+  });
+};
+
+export {
+  storage,
+  firestore,
+  timeStamp,
+  auth,
+  saveUser,
+  checkUserNameExists,
+  updatePostLikes,
+  addCommentToPost,
+};

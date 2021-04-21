@@ -23,7 +23,8 @@ function useStorage(file, caption) {
             firestore.collection("uploads").add({
               caption: caption,
               url: downloadUrl,
-              uploadedBy: user.uid,
+              likedBy: [],
+              user: firestore.collection("users").doc(user.uid),
               createdAt: timeStamp(),
             });
           });

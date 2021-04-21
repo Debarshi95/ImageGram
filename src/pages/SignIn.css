@@ -1,26 +1,29 @@
-.signup__root {
+.signin__root {
   flex: 1;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
-.signup__form {
+.signin__form {
   padding: 1.5rem;
-}
-
-.signup__form > form {
-  display: flex;
-  flex-direction: column;
+  width: 100%;
   margin: 2rem 0;
 }
 
-.signup__form > h3 {
+.signin__form > form {
+  display: flex;
+  flex-direction: column;
+  margin: 3rem 0;
+}
+
+.signin__form > h2 {
   margin: 1rem 0;
   text-align: center;
 }
-.signup__form > form > input {
-  padding: 8px 14px;
-  margin: 4px 0;
+.signin__form > form > input {
+  padding: 10px 14px;
+  margin: 6px 0;
   background-color: #fafafa;
   border: 1.8px solid #b8b8b8;
   font-family: inherit;
@@ -28,45 +31,30 @@
   outline: none;
 }
 
-.signup__form > p {
+.signin__form > p {
   text-align: center;
   font-size: 14px;
 }
-.signup__form a {
+.signin__form a {
   text-decoration: none;
   font-weight: 600;
 }
 
-.signup__error {
+.signin__error {
   color: rgb(207, 24, 24);
   margin: 1rem 0;
   font-weight: 600;
   font-size: 12px !important;
 }
 
-@media screen and (min-width: 422px) {
-  .signup__form {
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
 @media screen and (min-width: 600px) {
-  .signup__root {
+  .signin__root {
     justify-content: center;
-    align-items: center;
   }
-  .signup__form {
+  .signin__form {
     width: 400px;
     border: 1.8px solid #b8b8b8;
-    border-radius: 4px;
     background: #fff;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .signup__form {
-    width: 380px;
+    border-radius: 4px;
   }
 }

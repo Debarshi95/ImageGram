@@ -2,17 +2,26 @@ import { CircularProgress } from "@material-ui/core";
 import React from "react";
 import "./ButtonSubmitting.css";
 
-function ButtonSubmitting({ submitting, disabled, text }) {
+function ButtonSubmitting({ submitting, disabled, text, handler }) {
   return (
-    <div className="buttonsubmitting__root">
-      {submitting && <CircularProgress className="buttonsubmitting__spinner" />}
+    <>
+      {submitting && (
+        <div className="buttonsubmitting__loader">
+          <CircularProgress />
+        </div>
+      )}
 
       {!submitting && (
-        <button type="click" disabled={disabled}>
+        <button
+          className="buttonsubmitting__button"
+          type="click"
+          disabled={disabled}
+          onClick={handler}
+        >
           {text}
         </button>
       )}
-    </div>
+    </>
   );
 }
 

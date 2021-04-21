@@ -1,24 +1,34 @@
-.buttonsubmitting__root {
-  width: 100%;
-  padding: 10px;
-  background: #fafafa;
-  border: 1.8px solid #b8b8b8;
-  border-radius: 4px;
-  margin-top: 6px;
-  display: flex;
-  justify-content: center;
-  cursor: pointer;
+.buttonsubmitting__button:disabled {
+  opacity: 0.7;
+  cursor: initial;
 }
-
-.buttonsubmitting__root > button {
-  background: transparent;
+.buttonsubmitting__button {
   width: 100%;
   outline: none;
   border: 0;
   cursor: pointer;
+  font-weight: 600;
+  padding: 14px;
+  margin-top: 8px;
+  cursor: pointer;
+  background-color: blueviolet;
+  color: #fff;
+  border-radius: 4px;
 }
 
-.buttonsubmitting__spinner {
-  width: 20px !important;
-  height: 20px !important;
+.buttonsubmitting__loader {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 8px 0;
+  background-color: blueviolet;
+  padding: 2px 0;
+  border-radius: 4px;
+  padding: 6px 0;
+}
+
+.buttonsubmitting__loader > .MuiCircularProgress-colorPrimary {
+  height: 30px !important;
+  width: 30px !important;
+  color: #fff;
 }

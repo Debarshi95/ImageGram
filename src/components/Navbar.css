@@ -1,6 +1,6 @@
 .navbar__root {
   display: flex;
-  padding: 8px 0;
+  padding: 0 16px;
   justify-content: space-between;
   background-color: #fff;
   align-items: center;
@@ -10,10 +10,28 @@
 .navbar__root a {
   text-decoration: none;
   font-weight: 600;
-  padding: 0 1rem;
+  margin-right: 4px;
+}
+
+.navbar__root .MuiSvgIcon-root {
+  width: 36px;
+  height: 36px;
+  color: #b8b8b8;
+}
+.navbar__root .MuiAvatar-root {
+  width: 34px;
+  height: 34px;
+}
+
+.navbar__root > div > a:nth-child(1) {
+  margin-right: 14px;
 }
 .navbar__root input {
   display: none;
+}
+
+.navbar__unsignedlinks {
+  padding: 14px;
 }
 
 .navbar__msgerror {
@@ -22,18 +40,16 @@
   font-weight: 600;
 }
 
-.navbar__unsignedlinks {
-  padding: 1rem;
-}
-
 @media screen and (min-width: 768px) {
   .navbar__root {
     border-bottom: 1.8px solid #b8b8b8;
   }
-  .navbar__signedlinks {
-    padding: 0 5rem;
-  }
+
   .navbar__unsignedlinks {
-    padding: 1rem 5rem;
+    padding: 16px 4rem;
+  }
+
+  .navbar__signedlinks {
+    padding: 0 4rem;
   }
 }

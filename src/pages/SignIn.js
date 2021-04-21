@@ -1,10 +1,10 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
-import Navbar from "./Navbar";
+import Navbar from "../components/Navbar";
 import * as ROUTES from "../constant/routes";
 import "./SignIn.css";
 import { auth } from "../firebase";
-import ButtonSubmitting from "./ButtonSubmitting";
+import ButtonSubmitting from "../components/ButtonSubmitting";
 
 function SignIn() {
   const [input, setInput] = React.useState({ email: "", password: "" });
@@ -43,8 +43,9 @@ function SignIn() {
       <Navbar />
       <div className="signin__root">
         <div className="signin__form">
-          <h3>Sign In</h3>
-          <form autoComplete="off" onSubmit={setupSignIn}>
+          <h2>Sign In</h2>
+          <p>Sign in to continue</p>
+          <form autoComplete="off">
             <input
               type="email"
               name="email"
@@ -65,6 +66,7 @@ function SignIn() {
               submitting={submitting}
               disabled={disabled}
               text="Sign in"
+              handler={setupSignIn}
             />
           </form>
           {error && <p className="signin__error">{error}</p>}

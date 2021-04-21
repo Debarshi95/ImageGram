@@ -1,13 +1,12 @@
 import React from "react";
-import { useHistory } from "react-router";
 import useFirestore from "../hooks/useFirestore";
-import ImageCard from "./ImageCard";
+import ImageCard from "../components/ImageCard";
 import "./Home.css";
-import Navbar from "./Navbar";
-import Loader from "./Loader";
+import Navbar from "../components/Navbar";
+import Loader from "../components/Loader";
 
 function Home() {
-  const { images, loading } = useFirestore();
+  const { docs: images, loading } = useFirestore("uploads");
 
   return loading ? (
     <Loader />

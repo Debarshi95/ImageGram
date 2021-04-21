@@ -1,28 +1,26 @@
 import React from "react";
 import { firestore } from "../firebase";
 
-function useFirestore() {
-  const [images, setImages] = React.useState(null);
+function useFirestore(collectionName) {
+  const [docs, setDocs] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
     const unsub = firestore
-      .collection("uploads")
+      .collection(collectionName)
       .orderBy("createdAt", "desc")
       .onSnapshot(
         (snapshot) => {
-          setImages(
-            snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
-          );
+          setDocs(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
           setLoading(false);
         },
         (err) => console.log(err)
       );
     return () => unsub();
-  }, []);
+  }, [collectionName]);
 
   return {
-    images,
+    docs,
     loading,
   };
 }

@@ -5,10 +5,9 @@ import ImageUpload from "./components/ImageUpload";
 import { useAuth } from "./hooks/useAuth";
 import Loader from "./components/Loader";
 
-const LazyHome = React.lazy(() => import("./components/Home"));
-const LazySignIn = React.lazy(() => import("./components/SignIn"));
-const LazySignUp = React.lazy(() => import("./components/SignUp"));
-const LazyProfile = React.lazy(() => import("./components/Profile"));
+const LazyHome = React.lazy(() => import("./pages/Home"));
+const LazySignIn = React.lazy(() => import("./pages/SignIn"));
+const LazySignUp = React.lazy(() => import("./pages/SignUp"));
 
 function MainRouter() {
   const { user } = useAuth();
@@ -26,12 +25,6 @@ function MainRouter() {
             />
             <Route path={ROUTES.SIGN_IN} component={LazySignIn} />
             <Route path={ROUTES.SIGN_UP} component={LazySignUp} />
-            <Route
-              path={ROUTES.USER}
-              render={() =>
-                user ? <LazyProfile /> : <Redirect to={ROUTES.HOME} />
-              }
-            />
           </Switch>
         </Route>
       </Suspense>

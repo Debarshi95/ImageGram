@@ -10,6 +10,8 @@
 .imageupload__root > img {
   width: 100%;
   border-radius: 8px;
+  max-height: 440px;
+  object-fit: cover;
 }
 .imageupload__caption {
   width: 100%;
