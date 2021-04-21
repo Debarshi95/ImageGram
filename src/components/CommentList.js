@@ -34,7 +34,6 @@ function CommentList({ imageId }) {
     return () => unsub();
   }, [imageId]);
 
-  console.log(comments);
   return (
     <div className="commentlist__root">
       {comments.length > 0 &&

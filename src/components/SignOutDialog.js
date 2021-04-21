@@ -21,9 +21,14 @@ function SignOutDialog({ open, setOpen }) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">Logout?</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
+        <DialogTitle id="alert-dialog-title" style={{ fontFamily: "inherit" }}>
+          Logout?
+        </DialogTitle>
+        <DialogContent style={{ width: "300px" }}>
+          <DialogContentText
+            id="alert-dialog-description"
+            style={{ fontFamily: "inherit", fontWeight: 600 }}
+          >
             Do you want to logout?
           </DialogContentText>
         </DialogContent>
