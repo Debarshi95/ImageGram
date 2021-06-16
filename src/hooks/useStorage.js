@@ -1,6 +1,6 @@
 import React from "react";
 import { storage, firestore, timeStamp } from "../firebase";
-import { useAuth } from "./useAuth";
+import { useAuth } from "../provider/AuthProvider";
 
 function useStorage(file, caption) {
   const [progress, setProgress] = React.useState();

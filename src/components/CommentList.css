@@ -1,6 +1,7 @@
 .commentlist__root {
   padding: 0 16px;
   padding-bottom: 12px;
+  word-break: break-all;
 }
 .commentlist__root > p {
   margin: 4px 0;

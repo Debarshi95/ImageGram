@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import * as ROUTES from "./constant/routes";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import ImageUpload from "./components/ImageUpload";
-import { useAuth } from "./hooks/useAuth";
+import { useAuth } from "./provider/AuthProvider";
 import Loader from "./components/Loader";
 import NotFound from "./pages/NotFound";
 

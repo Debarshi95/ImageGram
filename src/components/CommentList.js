@@ -16,7 +16,6 @@ function CommentList({ imageId }) {
       .onSnapshot(
         async (snapshot) => {
           let allComments = [];
-          console.log(snapshot.docs.length);
           for (let i = 0; i < snapshot.docs.length; i++) {
             const comment = snapshot.docs[i].data();
             const user = await comment.user.get();

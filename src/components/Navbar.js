@@ -2,7 +2,7 @@ import React from "react";
 import * as ROUTES from "../constant/routes";
 import { Link, useHistory } from "react-router-dom";
 import "./Navbar.css";
-import { useAuth } from "../hooks/useAuth";
+import { useAuth } from "../provider/AuthProvider";
 import { Avatar, IconButton } from "@material-ui/core";
 import { AddCircleOutlined } from "@material-ui/icons";
 import SignOutDialog from "./SignOutDialog";

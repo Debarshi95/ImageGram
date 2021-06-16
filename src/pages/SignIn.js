@@ -13,9 +13,8 @@ function SignIn() {
   const history = useHistory();
   let disabled = input.email === "" || input.password === "";
 
-  const handleInput = (e) => {
+  const handleInput = (e) =>
     setInput((value) => ({ ...value, [e.target.name]: e.target.value }));
-  };
 
   const setupSignIn = (e) => {
     e.preventDefault();

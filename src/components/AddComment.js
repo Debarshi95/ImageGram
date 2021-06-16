@@ -1,7 +1,7 @@
 import React from "react";
 import "./AddComment.css";
 import { addCommentToPost } from "../firebase";
-import { useAuth } from "../hooks/useAuth";
+import { useAuth } from "../provider/AuthProvider";
 
 function AddComment({ imageId }) {
   const [comment, setComment] = React.useState("");

@@ -1,7 +1,7 @@
-import React from "react";
+// import React from "react";
 
-const authContext = React.createContext();
+// const authContext = React.createContext();
 
-const useAuth = () => React.useContext(authContext);
+// const useAuth = () => React.useContext(authContext);
 
-export { authContext, useAuth };
+// export { authContext, useAuth };
