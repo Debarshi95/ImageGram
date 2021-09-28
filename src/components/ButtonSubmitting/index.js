@@ -1,6 +1,6 @@
 import { CircularProgress } from "@material-ui/core";
 import React from "react";
-import "./ButtonSubmitting.css";
+import "./index.css";
 
 function ButtonSubmitting({ submitting, disabled, text, handler }) {
   return (

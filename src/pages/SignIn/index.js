@@ -1,10 +1,10 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
-import Navbar from "../components/Navbar";
-import * as ROUTES from "../constant/routes";
-import "./SignIn.css";
-import { auth } from "../firebase";
-import ButtonSubmitting from "../components/ButtonSubmitting";
+import Navbar from "../../components/Navbar";
+import * as ROUTES from "../../constant/routes";
+import "./index.css";
+import { auth } from "../../firebase";
+import ButtonSubmitting from "../../components/ButtonSubmitting";
 
 function SignIn() {
   const [input, setInput] = React.useState({ email: "", password: "" });

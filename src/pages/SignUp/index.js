@@ -1,10 +1,10 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
-import Navbar from "../components/Navbar";
-import * as ROUTES from "../constant/routes";
-import "./SignUp.css";
-import { auth, checkUserNameExists, saveUser } from "../firebase";
-import ButtonSubmitting from "../components/ButtonSubmitting";
+import Navbar from "../../components/Navbar";
+import * as ROUTES from "../../constant/routes";
+import "./index.css";
+import { auth, checkUserNameExists, saveUser } from "../../firebase";
+import ButtonSubmitting from "../../components/ButtonSubmitting";
 
 function SignUp() {
   const [input, setInput] = React.useState({

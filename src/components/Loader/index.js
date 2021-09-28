@@ -1,6 +1,6 @@
 import { CircularProgress } from "@material-ui/core";
 import React from "react";
-import "./Loader.css";
+import "./index.css";
 
 function Loader() {
   return (
