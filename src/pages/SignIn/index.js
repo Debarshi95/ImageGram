@@ -70,7 +70,7 @@ function SignIn() {
           </form>
           {error && <p className="signin__error">{error}</p>}
           <p>
-            Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign up</Link>
+            Don&apos;t have an account? <Link to={ROUTES.SIGN_UP}>Sign up</Link>
           </p>
         </div>
       </div>
