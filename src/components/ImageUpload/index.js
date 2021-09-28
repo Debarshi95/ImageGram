@@ -1,9 +1,9 @@
 import React from "react";
-import useStorage from "../hooks/useStorage";
-import "./ImageUpload.css";
+import useStorage from "../../hooks/useStorage";
+import "./index.css";
 import { useHistory, useLocation } from "react-router";
 import { LinearProgress } from "@material-ui/core";
-import * as ROUTES from "../constant/routes";
+import * as ROUTES from "../../constant/routes";
 
 function ImageUpload() {
   const history = useHistory();

@@ -2,11 +2,11 @@ import { Avatar, Divider, IconButton } from "@material-ui/core";
 import { FavoriteBorder, FavoriteRounded } from "@material-ui/icons";
 import React from "react";
 import { useToasts } from "react-toast-notifications";
-import { updatePostLikes } from "../firebase";
-import { useAuth } from "../provider/AuthProvider";
-import AddComment from "./AddComment";
-import CommentList from "./CommentList";
-import "./ImageCard.css";
+import { updatePostLikes } from "../../firebase";
+import { useAuth } from "../../provider/AuthProvider";
+import AddComment from "../AddComment";
+import CommentList from "../CommentList";
+import "./index.css";
 
 function ImageCard({ image }) {
   const { user } = useAuth();

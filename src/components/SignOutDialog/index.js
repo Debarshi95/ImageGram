@@ -7,7 +7,7 @@ import {
   DialogTitle,
 } from "@material-ui/core";
 import React from "react";
-import { auth } from "../firebase";
+import { auth } from "../../firebase";
 
 function SignOutDialog({ open, setOpen }) {
   const setLogout = () => {

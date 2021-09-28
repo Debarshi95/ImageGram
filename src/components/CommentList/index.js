@@ -1,7 +1,7 @@
 import React from "react";
-import { firestore } from "../firebase";
+import { firestore } from "../../firebase";
 
-import "./CommentList.css";
+import "./index.css";
 
 function CommentList({ imageId }) {
   const [comments, setComments] = React.useState([]);
