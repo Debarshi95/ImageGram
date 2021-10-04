@@ -47,10 +47,9 @@
     "@babel/core": "^7.15.5",
     "@babel/preset-env": "^7.15.6",
     "@babel/preset-react": "^7.14.5",
-    "babel-jest": "^27.2.3",
     "eslint": "^7.32.0",
-    "eslint-plugin-react": "^7.26.0",
-    "jest": "^27.2.3",
+    "eslint-plugin-react": "^7.26.1",
+    "jest": "^27.2.4",
     "jest-environment-jsdom": "^27.2.4",
     "react-test-renderer": "^17.0.2"
   }
