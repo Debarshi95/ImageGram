@@ -2,6 +2,11 @@
   "name": "image-gram",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "name": "Debarshi Bhattacharjee",
+    "email": "devdbhatt0@gmail.com",
+    "url": "https://github.com/Debarshi95"
+  },
   "dependencies": {
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
@@ -20,17 +25,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watchAll",
     "eject": "react-scripts eject",
-    "lint": "eslint src/**/*.js"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest",
-      "eslint:recommended",
-      "plugin:react/recommended"
-    ]
+    "lint": "eslint ./ --ignore-path .gitignore"
   },
   "browserslist": {
     "production": [
@@ -45,7 +44,14 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.15.6",
+    "@babel/preset-react": "^7.14.5",
+    "babel-jest": "^27.2.3",
     "eslint": "^7.32.0",
-    "eslint-plugin-react": "^7.26.0"
+    "eslint-plugin-react": "^7.26.0",
+    "jest": "^27.2.3",
+    "jest-environment-jsdom": "^27.2.4",
+    "react-test-renderer": "^17.0.2"
   }
 }
