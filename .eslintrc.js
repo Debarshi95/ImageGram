@@ -6,7 +6,12 @@ module.exports = {
     node: true,
     amd: true,
   },
-  extends: ["eslint:recommended", "plugin:react/recommended"],
+  extends: [
+    "react-app",
+    "react-app/jest",
+    "eslint:recommended",
+    "plugin:react/recommended",
+  ],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -14,8 +19,9 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: "module",
   },
-  plugins: ["react"],
+  plugins: ["react", "jest"],
   rules: {
     "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off",
   },
 };
