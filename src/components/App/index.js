@@ -1,6 +1,6 @@
 import React from "react";
-import MainRouter from "./MainRouter";
-import "./App.css";
+import MainRouter from "../MainRouter";
+import "./index.css";
 import { ToastProvider } from "react-toast-notifications";
 
 function App() {
