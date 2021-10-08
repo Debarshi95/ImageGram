@@ -8,6 +8,7 @@ function AddComment({ imageId }) {
   const { user } = useAuth();
 
   const handleComment = async (e) => {
+    console.log("clicked", { e });
     e.preventDefault();
     await addCommentToPost(imageId, user.uid, comment);
     setComment("");
