@@ -12,7 +12,11 @@ var config = {
   appId: process.env.REACT_APP_API_ID,
 };
 
-const firebaseApp = firebase.initializeApp(config);
+
+
+const firebaseApp = !firebase.apps.length
+  ? firebase.initializeApp(config)
+  : firebase.app;
 const storage = firebaseApp.storage();
 const firestore = firebaseApp.firestore();
 const timeStamp = firebase.firestore.FieldValue.serverTimestamp;
