@@ -17,7 +17,7 @@
   width: 100%;
   margin: 1.25rem 0;
 }
-.imageupload__caption > input[type="text"] {
+.imageupload__caption > input[type='text'] {
   width: 100%;
   padding: 0.8rem 1.5rem;
   border-radius: 26px;

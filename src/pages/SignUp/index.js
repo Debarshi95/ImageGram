@@ -1,26 +1,23 @@
-import React from "react";
-import { Link, useHistory } from "react-router-dom";
-import Navbar from "../../components/Navbar";
-import * as ROUTES from "../../constant/routes";
-import "./index.css";
-import { auth, checkUserNameExists, saveUser } from "../../firebase";
-import ButtonSubmitting from "../../components/ButtonSubmitting";
+import React from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import Navbar from '../../components/Navbar';
+import * as ROUTES from '../../constant/routes';
+import './index.css';
+import { auth, checkUserNameExists, saveUser } from '../../firebase';
+import ButtonSubmitting from '../../components/ButtonSubmitting';
 
 function SignUp() {
   const [input, setInput] = React.useState({
-    fullname: "",
-    username: "",
-    email: "",
-    password: "",
+    fullname: '',
+    username: '',
+    email: '',
+    password: '',
   });
-  const [error, setError] = React.useState("");
+  const [error, setError] = React.useState('');
   const [submitting, setSubmitting] = React.useState(false);
   const history = useHistory();
-  let disabled =
-    input.fullname === "" ||
-    input.username === "" ||
-    input.email === "" ||
-    input.password === "";
+  const disabled =
+    input.fullname === '' || input.username === '' || input.email === '' || input.password === '';
 
   const handleInput = (e) => {
     setInput((value) => ({ ...value, [e.target.name]: e.target.value }));
@@ -33,27 +30,17 @@ function SignUp() {
       const usernameExists = await checkUserNameExists(input.username);
       if (usernameExists) {
         setSubmitting(false);
-        setError("Username taken. Please try another username");
+        setError('Username taken. Please try another username');
         setInput({
           ...input,
-          password: "",
+          password: '',
         });
       } else {
-        const newUser = await auth.createUserWithEmailAndPassword(
-          input.email,
-          input.password
-        );
+        const newUser = await auth.createUserWithEmailAndPassword(input.email, input.password);
 
-        await newUser.user.updateProfile({
-          displayName: input.fullname,
-        });
+        await newUser.user.updateProfile({ displayName: input.fullname });
 
-        await saveUser(
-          newUser.user.uid,
-          input.username,
-          input.fullname,
-          newUser.user.email
-        );
+        await saveUser(newUser.user.uid, input.username, input.fullname, newUser.user.email);
 
         history.push(ROUTES.HOME);
       }
@@ -61,7 +48,7 @@ function SignUp() {
       setSubmitting(false);
       setInput({
         ...input,
-        password: "",
+        password: '',
       });
       setError(err.message);
     }
@@ -116,7 +103,8 @@ function SignUp() {
           </form>
           {error && <p className="signup__error">{error}</p>}
           <p>
-            Have an account? <Link to={ROUTES.SIGN_IN}>Sign in</Link>
+            Have an account?
+            <Link to={ROUTES.SIGN_IN}>Sign in</Link>
           </p>
         </div>
       </div>

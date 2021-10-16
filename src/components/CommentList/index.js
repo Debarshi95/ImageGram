@@ -1,31 +1,31 @@
-import React from "react";
-import { firestore } from "../../firebase";
-
-import "./index.css";
+import React from 'react';
+import { firestore } from '../../firebase';
+import './index.css';
 
 function CommentList({ imageId }) {
   const [comments, setComments] = React.useState([]);
-  const docRef = React.useRef(firestore.collection("uploads").doc(imageId));
+  const docRef = React.useRef(firestore.collection('uploads').doc(imageId));
 
   React.useEffect(() => {
     const unsub = firestore
-      .collection("comments")
-      .orderBy("createdAt", "desc")
-      .where("image", "==", docRef.current)
+      .collection('comments')
+      .orderBy('createdAt', 'desc')
+      .where('image', '==', docRef.current)
       .limit(4)
       .onSnapshot(
         async (snapshot) => {
-          let allComments = [];
-          for (let i = 0; i < snapshot.docs.length; i++) {
-            const comment = snapshot.docs[i].data();
-            const user = await comment.user.get();
+          const commentList = await Promise.all(
+            snapshot.docs.map(async (doc) => {
+              const comment = doc.data();
+              comment.id = doc.id;
 
-            comment.id = snapshot.docs[i].id;
-            comment.user = user.data();
+              const user = await comment.user.get();
+              comment.user = user.data();
 
-            allComments.push(comment);
-          }
-          setComments([...allComments.reverse()]);
+              return { ...comment };
+            })
+          );
+          setComments([...commentList]);
         },
         (err) => console.log(err)
       );

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 function ProgressBar({ progress, url, setFile, setUpload }) {
   React.useEffect(() => {

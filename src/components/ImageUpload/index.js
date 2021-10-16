@@ -1,15 +1,15 @@
-import React from "react";
-import useStorage from "../../hooks/useStorage";
-import "./index.css";
-import { useHistory, useLocation } from "react-router";
-import { LinearProgress } from "@material-ui/core";
-import * as ROUTES from "../../constant/routes";
+import React from 'react';
+import { LinearProgress } from '@material-ui/core';
+import './index.css';
+import { useHistory, useLocation } from 'react-router-dom';
+import * as ROUTES from '../../constant/routes';
+import useStorage from '../../hooks/useStorage';
 
 function ImageUpload() {
   const history = useHistory();
   const { state } = useLocation();
   const [file, setFile] = React.useState(null);
-  const [caption, setCaption] = React.useState("");
+  const [caption, setCaption] = React.useState('');
 
   const { progress, url } = useStorage(file, caption);
 
@@ -40,7 +40,7 @@ function ImageUpload() {
         </div>
         <img src={URL.createObjectURL(state.file)} alt="" />
         <div className="imageupload__btnActions">
-          <button type="button" onClick={upload} disabled={caption === ""}>
+          <button type="button" onClick={upload} disabled={caption === ''}>
             Upload
           </button>
           <button type="button" onClick={() => history.goBack()}>

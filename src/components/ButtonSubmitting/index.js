@@ -1,6 +1,6 @@
-import { CircularProgress } from "@material-ui/core";
-import React from "react";
-import "./index.css";
+import { CircularProgress } from '@material-ui/core';
+import React from 'react';
+import './index.css';
 
 function ButtonSubmitting({ submitting, disabled, text, handler }) {
   return (
@@ -14,7 +14,7 @@ function ButtonSubmitting({ submitting, disabled, text, handler }) {
       {!submitting && (
         <button
           className="buttonsubmitting__button"
-          type="click"
+          type="button"
           disabled={disabled}
           onClick={handler}
         >

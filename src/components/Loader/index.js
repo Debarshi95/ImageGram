@@ -1,6 +1,6 @@
-import { CircularProgress } from "@material-ui/core";
-import React from "react";
-import "./index.css";
+import { CircularProgress } from '@material-ui/core';
+import React from 'react';
+import './index.css';
 
 function Loader() {
   return (

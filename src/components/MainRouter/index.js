@@ -1,14 +1,15 @@
-import React from "react";
-import * as ROUTES from "../../constant/routes";
-import { Redirect, Route, Switch } from "react-router-dom";
-import ImageUpload from "../ImageUpload";
-import { useAuth } from "../../provider/AuthProvider";
-import NotFound from "../../pages/NotFound";
-import Loader from "../Loader";
+import React from 'react';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import * as ROUTES from '../../constant/routes';
+import ImageUpload from '../ImageUpload';
+import { useAuth } from '../../provider/AuthProvider';
+import NotFound from '../../pages/NotFound';
+import Loader from '../Loader';
+import loadable from '../../utils/loadable';
 
-const LazyHome = React.lazy(() => import("../../pages/Home"));
-const LazySignIn = React.lazy(() => import("../../pages/SignIn"));
-const LazySignUp = React.lazy(() => import("../../pages/SignUp"));
+const LazyHome = loadable(() => import('../../pages/Home'));
+const LazySignIn = loadable(() => import('../../pages/SignIn'));
+const LazySignUp = loadable(() => import('../../pages/SignUp'));
 
 function MainRouter() {
   const { user } = useAuth();
@@ -19,9 +20,7 @@ function MainRouter() {
           <Route exact path={ROUTES.HOME} component={LazyHome} />
           <Route
             path={ROUTES.UPLOAD_FILE}
-            render={() =>
-              user ? <ImageUpload /> : <Redirect to={ROUTES.HOME} />
-            }
+            render={() => (user ? <ImageUpload /> : <Redirect to={ROUTES.HOME} />)}
           />
           <Route path={ROUTES.SIGN_IN} component={LazySignIn} />
           <Route path={ROUTES.SIGN_UP} component={LazySignUp} />

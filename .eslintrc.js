@@ -1,27 +1,27 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true,
     jest: true,
     node: true,
     amd: true,
+    es6: true,
+    es2021: true,
   },
-  extends: [
-    "react-app",
-    "react-app/jest",
-    "eslint:recommended",
-    "plugin:react/recommended",
-  ],
+  extends: ['airbnb', 'prettier'],
   parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
+    ecmaFeatures: { jsx: true },
     ecmaVersion: 12,
-    sourceType: "module",
+    sourceType: 'module',
   },
-  plugins: ["react", "jest"],
+  plugins: ['prettier'],
   rules: {
-    "react/prop-types": "off",
-    "react/react-in-jsx-scope": "off",
+    'react/prop-types': 'off',
+    'react/react-in-jsx-scope': 'off',
+    'react/jsx-filename-extension': ['warn', { extensions: ['.js', '.jsx'] }],
+    'import/no-extraneous-dependencies': [
+      'error',
+      { devDependencies: ['**/*.{js,jsx}', '**/*.test.{js,jsx}', '**/*.spec.{js,jsx}'] },
+    ],
+    'prettier/prettier': 'error',
   },
 };

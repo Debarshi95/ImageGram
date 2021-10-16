@@ -1,12 +1,12 @@
-import { Avatar, Divider, IconButton } from "@material-ui/core";
-import { FavoriteBorder, FavoriteRounded } from "@material-ui/icons";
-import React from "react";
-import { useToasts } from "react-toast-notifications";
-import { updatePostLikes } from "../../firebase";
-import { useAuth } from "../../provider/AuthProvider";
-import AddComment from "../AddComment";
-import CommentList from "../CommentList";
-import "./index.css";
+import { Avatar, Divider, IconButton } from '@material-ui/core';
+import { FavoriteBorder, FavoriteRounded } from '@material-ui/icons';
+import React from 'react';
+import { useToasts } from 'react-toast-notifications';
+import { updatePostLikes } from '../../firebase';
+import { useAuth } from '../../provider/AuthProvider';
+import AddComment from '../AddComment';
+import CommentList from '../CommentList';
+import './index.css';
 
 function ImageCard({ image }) {
   const { user } = useAuth();
@@ -15,12 +15,12 @@ function ImageCard({ image }) {
   const [userInfo, setUserInfo] = React.useState(null);
   const [hasLiked, setHasLiked] = React.useState(false);
 
-  ///get user asociated with image/post
+  // get user asociated with image/post
   React.useEffect(() => {
     image.user.get().then((doc) => setUserInfo({ ...doc.data(), id: doc.id }));
   }, [image]);
 
-  //Set Like button status based on current user
+  // Set Like button status based on current user
   React.useEffect(() => {
     if (user !== null) {
       setHasLiked(image.likedBy.includes(user.uid));
@@ -29,7 +29,7 @@ function ImageCard({ image }) {
     }
   }, [image.likedBy, user]);
 
-  //Update current user's like/dislike
+  // Update current user's like/dislike
   const updateLike = () => {
     if (user) {
       if (!image.likedBy.includes(user.uid)) {
@@ -41,9 +41,9 @@ function ImageCard({ image }) {
         setHasLiked(false);
       }
     } else {
-      addToast("You must be logged in", {
+      addToast('You must be logged in', {
         autoDismiss: true,
-        appearance: "error",
+        appearance: 'error',
       });
     }
   };
@@ -53,7 +53,7 @@ function ImageCard({ image }) {
         {userInfo && (
           <>
             <div>
-              <Avatar>{userInfo.username?.split("")[0].toUpperCase()}</Avatar>
+              <Avatar>{userInfo.username?.split('')[0].toUpperCase()}</Avatar>
               <p>{userInfo.fullname}</p>
             </div>
           </>
@@ -66,7 +66,8 @@ function ImageCard({ image }) {
             {hasLiked ? <FavoriteRounded color="error" /> : <FavoriteBorder />}
           </IconButton>
           <p>
-            {image.likedBy.length} {image.likedBy.length > 1 ? "likes" : "like"}
+            {image.likedBy.length}
+            <span>{image.likedBy.length > 1 ? ' likes' : ' like'}</span>
           </p>
         </div>
       </div>

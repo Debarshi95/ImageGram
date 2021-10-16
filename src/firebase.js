@@ -1,9 +1,9 @@
-import firebase from "firebase/app";
-import "firebase/storage";
-import "firebase/firestore";
-import "firebase/auth";
+import firebase from 'firebase/app';
+import 'firebase/storage';
+import 'firebase/firestore';
+import 'firebase/auth';
 
-var config = {
+const config = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
   projectId: process.env.REACT_APP_PROJECT_ID,
@@ -12,26 +12,23 @@ var config = {
   appId: process.env.REACT_APP_API_ID,
 };
 
+if (!firebase.apps.length) {
+  firebase.initializeApp(config);
+}
 
-
-const firebaseApp = !firebase.apps.length
-  ? firebase.initializeApp(config)
-  : firebase.app;
-const storage = firebaseApp.storage();
-const firestore = firebaseApp.firestore();
+const storage = firebase.storage();
+const firestore = firebase.firestore();
 const timeStamp = firebase.firestore.FieldValue.serverTimestamp;
-const auth = firebaseApp.auth();
+const auth = firebase.auth();
+console.log({ firebase, firestore });
 
 const checkUserNameExists = async (username) => {
-  const res = await firestore
-    .collection("users")
-    .where("username", "==", username)
-    .get();
+  const res = await firestore.collection('users').where('username', '==', username).get();
   return res.docs.length > 0;
 };
 
 const saveUser = async (uid, username, fullname, email) => {
-  const res = await firestore.collection("users").doc(uid).set({
+  const res = await firestore.collection('users').doc(uid).set({
     username,
     fullname,
     email,
@@ -42,16 +39,16 @@ const saveUser = async (uid, username, fullname, email) => {
 };
 
 const updatePostLikes = async (imageId, users) => {
-  await firestore.collection("uploads").doc(imageId).update({
+  await firestore.collection('uploads').doc(imageId).update({
     likedBy: users,
   });
 };
 
 const addCommentToPost = async (imageId, userId, comment) => {
-  await firestore.collection("comments").add({
-    image: firestore.collection("uploads").doc(imageId),
+  await firestore.collection('comments').add({
+    image: firestore.collection('uploads').doc(imageId),
     comment,
-    user: firestore.collection("users").doc(userId),
+    user: firestore.collection('users').doc(userId),
     createdAt: timeStamp(),
   });
 };
