@@ -1,8 +1,8 @@
-import React from "react";
-import MainRouter from "./MainRouter";
-import "./App.css";
-import { ToastProvider } from "react-toast-notifications";
-import { BrowserRouter as Router } from "react-router-dom";
+import React from 'react';
+import './App.css';
+import { ToastProvider } from 'react-toast-notifications';
+import { BrowserRouter as Router } from 'react-router-dom';
+import MainRouter from './components/MainRouter';
 
 function App() {
   return (

@@ -2,11 +2,7 @@
   "name": "image-gram",
   "version": "0.1.0",
   "private": true,
-  "author": {
-    "name": "Debarshi Bhattacharjee",
-    "email": "devdbhatt0@gmail.com",
-    "url": "https://github.com/Debarshi95"
-  },
+  "author": "Debarshi Bhattacharjee",
   "dependencies": {
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
@@ -23,11 +19,12 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "test:nowatch": "react-scripts test --watchAll=false",
+    "test": "cross-env CI=true react-scripts test",
+    "test:watch": "react-scripts test --watchAll",
     "test:coverage": "react-scripts test --coverage",
     "eject": "react-scripts eject",
-    "lint": "eslint ./ --ignore-path .gitignore"
+    "lint": "eslint . --ignore-path .gitignore",
+    "lint:fix": "eslint --fix . --ignore-path .gitignore"
   },
   "browserslist": {
     "production": [
@@ -45,8 +42,16 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "cross-env": "^7.0.3",
     "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "8.3.0",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "4.0.0",
     "eslint-plugin-react": "^7.26.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "prettier": "2.4.1",
     "react-test-renderer": "^17.0.2"
   }
 }

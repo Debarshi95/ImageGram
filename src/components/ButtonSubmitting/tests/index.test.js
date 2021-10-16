@@ -1,8 +1,8 @@
-import React from "react";
-import { render, fireEvent } from "@testing-library/react";
-import ButtonSubmitting from "../index";
+import React from 'react';
+import { render, fireEvent } from '@testing-library/react';
+import ButtonSubmitting from '../index';
 
-describe("<ButtonSubmitting/> tests", () => {
+describe('<ButtonSubmitting/> tests', () => {
   let submitting;
   let disabled;
   let text;
@@ -10,10 +10,10 @@ describe("<ButtonSubmitting/> tests", () => {
   beforeEach(() => {
     submitting = false;
     disabled = true;
-    text = "Signing in";
+    text = 'Signing in';
     handlerSpy = jest.fn();
   });
-  it("should render and match the snapshot", () => {
+  it('should render and match the snapshot', () => {
     const { baseElement } = render(
       <ButtonSubmitting
         text={text}
@@ -27,13 +27,9 @@ describe("<ButtonSubmitting/> tests", () => {
 
   it("should render button when 'submitting' is false", () => {
     const { baseElement } = render(
-      <ButtonSubmitting
-        submitting={submitting}
-        text={text}
-        disabled={disabled}
-      />
+      <ButtonSubmitting submitting={submitting} text={text} disabled={disabled} />
     );
-    const btn = baseElement.querySelector(".buttonsubmitting__button");
+    const btn = baseElement.querySelector('.buttonsubmitting__button');
     expect(btn).toBeInTheDocument();
     expect(btn.disabled).toBeTruthy();
     expect(btn.textContent).toEqual(text);
@@ -44,16 +40,16 @@ describe("<ButtonSubmitting/> tests", () => {
     const { findByRole } = render(
       <ButtonSubmitting submitting={submitting} handler={handlerSpy} />
     );
-    const bar = await findByRole("progressbar");
+    const bar = await findByRole('progressbar');
 
     expect(bar).toBeInTheDocument();
   });
 
-  it("should call handlerSpy on click", async () => {
+  it('should call handlerSpy on click', async () => {
     const { baseElement } = render(
       <ButtonSubmitting submitting={submitting} handler={handlerSpy} />
     );
-    const btn = baseElement.querySelector(".buttonsubmitting__button");
+    const btn = baseElement.querySelector('.buttonsubmitting__button');
     fireEvent.click(btn);
     expect(handlerSpy).toBeCalled();
   });

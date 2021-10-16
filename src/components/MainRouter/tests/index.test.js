@@ -1,16 +1,16 @@
-import MainRouter from "../index";
-import { createMemoryHistory } from "history";
-import { Router } from "react-router";
-import { renderWithAuthProvider } from "../../../utils/testUtils";
+import { createMemoryHistory } from 'history';
+import { Router } from 'react-router-dom';
+import { renderWithAuthProvider } from '../../../utils/testUtils';
+import MainRouter from '../index';
 
-describe("<MainRouter/> tests", () => {
+describe('<MainRouter/> tests', () => {
   let ctxValue;
   let history;
   beforeEach(() => {
     ctxValue = { user: null };
     history = createMemoryHistory();
   });
-  it("should render and match the snapshot", () => {
+  it('should render and match the snapshot', () => {
     const { baseElement } = renderWithAuthProvider(
       <Router history={history}>
         <MainRouter />
@@ -20,19 +20,19 @@ describe("<MainRouter/> tests", () => {
     expect(baseElement).toMatchSnapshot();
   });
 
-  it("should render the fallback loader on initial load", async () => {
+  it('should render the fallback loader on initial load', async () => {
     const { findByRole } = renderWithAuthProvider(
       <Router history={history}>
         <MainRouter />
       </Router>,
       ctxValue
     );
-    const loader = await findByRole("progressbar");
+    const loader = await findByRole('progressbar');
 
     expect(loader).toBeInTheDocument();
   });
 
-  it("should redirect to home when user is not available", async () => {
+  it('should redirect to home when user is not available', async () => {
     renderWithAuthProvider(
       <Router history={history}>
         <MainRouter />
@@ -40,6 +40,6 @@ describe("<MainRouter/> tests", () => {
       ctxValue
     );
 
-    expect(history.location.pathname).toEqual("/");
+    expect(history.location.pathname).toEqual('/');
   });
 });

@@ -1,20 +1,19 @@
-import React from "react";
-import { Link, useHistory } from "react-router-dom";
-import Navbar from "../../components/Navbar";
-import * as ROUTES from "../../constant/routes";
-import "./index.css";
-import { auth } from "../../firebase";
-import ButtonSubmitting from "../../components/ButtonSubmitting";
+import React from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import Navbar from '../../components/Navbar';
+import * as ROUTES from '../../constant/routes';
+import './index.css';
+import { auth } from '../../firebase';
+import ButtonSubmitting from '../../components/ButtonSubmitting';
 
 function SignIn() {
-  const [input, setInput] = React.useState({ email: "", password: "" });
-  const [error, setError] = React.useState("");
+  const [input, setInput] = React.useState({ email: '', password: '' });
+  const [error, setError] = React.useState('');
   const [submitting, setSubmitting] = React.useState(false);
   const history = useHistory();
-  let disabled = input.email === "" || input.password === "";
+  const disabled = input.email === '' || input.password === '';
 
-  const handleInput = (e) =>
-    setInput((value) => ({ ...value, [e.target.name]: e.target.value }));
+  const handleInput = (e) => setInput((value) => ({ ...value, [e.target.name]: e.target.value }));
 
   const setupSignIn = (e) => {
     e.preventDefault();
@@ -34,7 +33,7 @@ function SignIn() {
 
     setInput({
       ...input,
-      password: "",
+      password: '',
     });
   };
   return (
@@ -70,7 +69,8 @@ function SignIn() {
           </form>
           {error && <p className="signin__error">{error}</p>}
           <p>
-            Don&apos;t have an account? <Link to={ROUTES.SIGN_UP}>Sign up</Link>
+            Don&apos;t have an account?
+            <Link to={ROUTES.SIGN_UP}>Sign up</Link>
           </p>
         </div>
       </div>

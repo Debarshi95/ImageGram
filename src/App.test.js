@@ -1,3 +1,3 @@
-describe("<App/> tests", () => {
-  it("should do nothing", () => {});
+describe('<App/> tests', () => {
+  it('should do nothing', () => {});
 });
