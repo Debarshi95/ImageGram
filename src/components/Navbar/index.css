@@ -26,7 +26,7 @@
 .navbar__root > div > a:nth-child(1) {
   margin-right: 14px;
 }
-.navbar__root input {
+.navbar__root input[type='file'] {
   display: none;
 }
 

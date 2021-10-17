@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 function ProgressBar({ progress, url, setFile, setUpload }) {
-  React.useEffect(() => {
+  useEffect(() => {
     if (url) {
       setFile(null);
       setUpload(false);

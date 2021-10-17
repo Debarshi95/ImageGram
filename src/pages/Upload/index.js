@@ -1,21 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { LinearProgress } from '@material-ui/core';
 import './index.css';
 import { useHistory, useLocation } from 'react-router-dom';
-import * as ROUTES from '../../constant/routes';
 import useStorage from '../../hooks/useStorage';
+import routes from '../../utils/routes';
 
 function ImageUpload() {
   const history = useHistory();
   const { state } = useLocation();
-  const [file, setFile] = React.useState(null);
-  const [caption, setCaption] = React.useState('');
+  const [file, setFile] = useState(null);
+  const [caption, setCaption] = useState('');
 
   const { progress, url } = useStorage(file, caption);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (url) {
-      history.push(ROUTES.HOME);
+      history.push(routes.home.path);
     }
   }, [history, url]);
 

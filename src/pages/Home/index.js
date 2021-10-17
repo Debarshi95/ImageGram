@@ -1,19 +1,50 @@
-import React from 'react';
-import useFirestore from '../../hooks/useFirestore';
+import React, { useEffect, useState } from 'react';
+import { Box } from '@material-ui/core';
 import ImageCard from '../../components/ImageCard';
-import Navbar from '../../components/Navbar';
 import Loader from '../../components/Loader';
+import { useAuth } from '../../providers/AuthProvider';
+import { firestore } from '../../firebase';
 
 function Home() {
-  const { docs: images, loading } = useFirestore('uploads');
+  const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const { user } = useAuth();
 
-  return loading ? (
-    <Loader />
-  ) : (
+  useEffect(() => {
+    let unsub;
+    if (user?.uid) {
+      unsub = firestore()
+        .collection('uploads')
+        .where('userId', '==', user.uid)
+        .onSnapshot((snap) => {
+          const docs = [];
+
+          snap.forEach((doc) => {
+            docs.push({ id: doc.id, ...doc.data() });
+          });
+          setImages([...docs]);
+          setLoading(false);
+        });
+    }
+
+    return () => {
+      if (unsub) {
+        unsub();
+      }
+    };
+  }, [user?.uid]);
+
+  return (
     <>
-      <Navbar />
-
-      {images && images.map((image) => <ImageCard key={image.id} image={image} />)}
+      {loading ? (
+        <Loader />
+      ) : (
+        <Box>
+          {images?.map((image) => (
+            <ImageCard key={image.id} image={image} />
+          ))}
+        </Box>
+      )}
     </>
   );
 }
