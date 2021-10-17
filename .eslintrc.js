@@ -7,16 +7,15 @@ module.exports = {
     es6: true,
     es2021: true,
   },
-  extends: ['airbnb', 'prettier'],
+  extends: ['airbnb', 'airbnb/hooks', 'plugin:prettier/recommended'],
   parserOptions: {
     ecmaFeatures: { jsx: true },
     ecmaVersion: 12,
     sourceType: 'module',
   },
-  plugins: ['prettier'],
+  plugins: [],
   rules: {
     'react/prop-types': 'off',
-    'react/react-in-jsx-scope': 'off',
     'react/jsx-filename-extension': ['warn', { extensions: ['.js', '.jsx'] }],
     'import/no-extraneous-dependencies': [
       'error',
