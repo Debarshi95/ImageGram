@@ -1,12 +1,21 @@
 import React, { useRef, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import './index.css';
-import { Avatar, IconButton } from '@material-ui/core';
+import {
+  Avatar,
+  Box,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  IconButton,
+} from '@material-ui/core';
 import { AddCircleOutlined } from '@material-ui/icons';
 import { useToasts } from 'react-toast-notifications';
-import SignOutDialog from '../SignOutDialog';
 import { useAuth } from '../../providers/AuthProvider';
 import routes from '../../utils/routes';
+import { auth } from '../../firebase';
 
 function Navbar() {
   const [open, setOpen] = useState(false);
@@ -35,14 +44,45 @@ function Navbar() {
       }
     }
   };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const renderDialog = () => {
+    return (
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogContent className="navbar__dialogContent">
+          <DialogContentText id="alert-dialog-description" className="navbar__dialogText">
+            Do you want to logout?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button
+            onClick={() => {
+              handleClose();
+              auth().signOut();
+            }}
+            color="primary"
+            autoFocus
+          >
+            Sign out
+          </Button>
+        </DialogActions>
+      </Dialog>
+    );
+  };
   return (
-    <nav
-      className={`navbar__root ${
-        !isAuthenticated ? 'navbar__unsignedlinks' : 'navbar__signedlinks'
-      }`}
-    >
-      <Link to={routes.home.path}>ImageGram</Link>
-      <div>
+    <nav className={`navbar__root ${!isAuthenticated && 'navbar__links'}`}>
+      <Box className="navbar__container">
+        <Link to={routes.home.path}>ImageGram</Link>
         {isAuthenticated ? (
           <div>
             <input
@@ -53,14 +93,14 @@ function Navbar() {
               onChange={handleFile}
             />
 
-            <IconButton component="span" onClick={handleClick}>
+            <IconButton component="button" onClick={handleClick}>
               <AddCircleOutlined />
             </IconButton>
 
             <IconButton onClick={() => setOpen(true)}>
               <Avatar>{user?.displayName?.split('')[0]}</Avatar>
             </IconButton>
-            <SignOutDialog open={open} setOpen={setOpen} />
+            {renderDialog()}
           </div>
         ) : (
           <div>
@@ -68,7 +108,7 @@ function Navbar() {
             <Link to={routes.signUp.path}>Sign up</Link>
           </div>
         )}
-      </div>
+      </Box>
     </nav>
   );
 }
