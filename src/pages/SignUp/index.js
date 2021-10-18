@@ -1,20 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import Navbar from '../../components/Navbar';
-import * as ROUTES from '../../constant/routes';
 import './index.css';
-import { auth, checkUserNameExists, saveUser } from '../../firebase';
-import ButtonSubmitting from '../../components/ButtonSubmitting';
+import { Box } from '@material-ui/core';
+import { checkUserNameExists, saveUser, createUserWithEmailAndPassword } from '../../services';
+import routes from '../../utils/routes';
+import LoadingButton from '../../components/LoadingButton';
 
 function SignUp() {
-  const [input, setInput] = React.useState({
+  const [input, setInput] = useState({
     fullname: '',
     username: '',
     email: '',
     password: '',
   });
-  const [error, setError] = React.useState('');
-  const [submitting, setSubmitting] = React.useState(false);
+  const [error, setError] = useState('');
+  const [submitting, setSubmitting] = useState(false);
   const history = useHistory();
   const disabled =
     input.fullname === '' || input.username === '' || input.email === '' || input.password === '';
@@ -23,26 +23,26 @@ function SignUp() {
     setInput((value) => ({ ...value, [e.target.name]: e.target.value }));
   };
 
-  const setupSignUp = async (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
     setSubmitting(true);
     try {
       const usernameExists = await checkUserNameExists(input.username);
       if (usernameExists) {
         setSubmitting(false);
-        setError('Username taken. Please try another username');
+        setError('Username taken. Please try something else');
         setInput({
           ...input,
           password: '',
         });
       } else {
-        const newUser = await auth.createUserWithEmailAndPassword(input.email, input.password);
+        const newUser = await createUserWithEmailAndPassword(input.email, input.password);
 
         await newUser.user.updateProfile({ displayName: input.fullname });
 
         await saveUser(newUser.user.uid, input.username, input.fullname, newUser.user.email);
 
-        history.push(ROUTES.HOME);
+        history.push(routes.home.path);
       }
     } catch (err) {
       setSubmitting(false);
@@ -55,60 +55,64 @@ function SignUp() {
   };
 
   return (
-    <>
-      <Navbar />
-      <div className="signup__root">
-        <div className="signup__form">
+    <div className="signup__root">
+      <div className="signup__wrapper">
+        <Box className="signup__header">
           <h2>Sign Up</h2>
           <p>Sign up to get started</p>
-          <form autoComplete="off" onSubmit={setupSignUp}>
-            <input
-              type="text"
-              name="fullname"
-              onChange={handleInput}
-              placeholder="Fullname"
-              aria-label="Fullname"
-              value={input.fullname}
-            />
-            <input
-              type="text"
-              name="username"
-              onChange={handleInput}
-              placeholder="Username"
-              aria-label="Username"
-              value={input.username}
-            />
-            <input
-              type="email"
-              name="email"
-              onChange={handleInput}
-              placeholder="Email"
-              aria-label="Email"
-              value={input.email}
-            />
-            <input
-              type="password"
-              name="password"
-              onChange={handleInput}
-              placeholder="Password"
-              aria-label="Password"
-              value={input.password}
-            />
-            <ButtonSubmitting
-              submitting={submitting}
-              disabled={disabled}
-              text="Sign up"
-              handler={setupSignUp}
-            />
-          </form>
-          {error && <p className="signup__error">{error}</p>}
+        </Box>
+        <form autoComplete="off" className="signup__form">
+          <input
+            type="text"
+            name="fullname"
+            onChange={handleInput}
+            placeholder="Fullname"
+            aria-label="Fullname"
+            value={input.fullname}
+          />
+          <input
+            type="text"
+            name="username"
+            onChange={handleInput}
+            placeholder="Username"
+            aria-label="Username"
+            value={input.username}
+          />
+          <input
+            type="email"
+            name="email"
+            onChange={handleInput}
+            placeholder="Email"
+            aria-label="Email"
+            value={input.email}
+          />
+          <input
+            type="password"
+            name="password"
+            onChange={handleInput}
+            placeholder="Password"
+            aria-label="Password"
+            value={input.password}
+          />
+          <LoadingButton
+            disabled={disabled}
+            onClick={handleSignUp}
+            loading={submitting}
+            className="signup__button"
+            loadingText="Submitting..."
+          >
+            Sign up
+          </LoadingButton>
+        </form>
+        <Box className="signin__errWrapper">
+          {error && <p className="error signup__error">{error}</p>}
           <p>
             Have an account?
-            <Link to={ROUTES.SIGN_IN}>Sign in</Link>
+            <Link to={routes.signIn.path}>Sign in</Link>
           </p>
-        </div>
+        </Box>
       </div>
-    </>
+    </div>
   );
 }
 

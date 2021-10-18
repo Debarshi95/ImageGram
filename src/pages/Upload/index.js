@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { LinearProgress } from '@material-ui/core';
-import './index.css';
+import { Box, Button, LinearProgress } from '@material-ui/core';
 import { useHistory, useLocation } from 'react-router-dom';
+import LoadingButton from '../../components/LoadingButton';
 import useStorage from '../../hooks/useStorage';
 import routes from '../../utils/routes';
+import { useAuth } from '../../providers/AuthProvider';
+import './index.css';
 
-function ImageUpload() {
+function Upload() {
   const history = useHistory();
   const { state } = useLocation();
   const [file, setFile] = useState(null);
   const [caption, setCaption] = useState('');
+  const { user } = useAuth();
 
-  const { progress, url } = useStorage(file, caption);
+  const { progress, url, loading } = useStorage(file, caption, user?.uid);
 
   useEffect(() => {
     if (url) {
@@ -19,37 +22,45 @@ function ImageUpload() {
     }
   }, [history, url]);
 
-  const upload = () => {
+  const handleUpload = () => {
     setFile(state.file);
   };
 
   return (
-    <>
-      {progress && <LinearProgress value={progress} variant="determinate" />}
-      <div className="imageupload__root">
-        <div className="imageupload__caption">
-          <input
-            autoComplete="off"
-            type="text"
-            name="caption"
-            value={caption}
-            onChange={({ target }) => setCaption(target.value)}
-            placeholder="Caption"
-            aria-label="Caption"
-          />
-        </div>
+    <div className="upload__root">
+      <LinearProgress
+        value={progress}
+        variant="determinate"
+        className={`upload__progress ${loading && 'progress__visible'}`}
+      />
+      <Box className="upload__container">
+        <input
+          autoComplete="off"
+          type="text"
+          name="caption"
+          value={caption}
+          onChange={({ target }) => setCaption(target.value)}
+          placeholder="Caption"
+          aria-label="Caption"
+          className="upload__caption"
+        />
         <img src={URL.createObjectURL(state.file)} alt="" />
-        <div className="imageupload__btnActions">
-          <button type="button" onClick={upload} disabled={caption === ''}>
+        <div className="upload__btnActions">
+          <LoadingButton
+            onClick={handleUpload}
+            loading={loading}
+            loadingText="Uploading..."
+            disabled={caption === ''}
+          >
             Upload
-          </button>
-          <button type="button" onClick={() => history.goBack()}>
+          </LoadingButton>
+          <Button type="button" onClick={() => history.goBack()}>
             Cancel
-          </button>
+          </Button>
         </div>
-      </div>
-    </>
+      </Box>
+    </div>
   );
 }
 
-export default ImageUpload;
+export default Upload;
