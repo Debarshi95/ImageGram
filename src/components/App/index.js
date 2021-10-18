@@ -1,14 +1,14 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { Suspense } from 'react';
-import './index.css';
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 import { Route, Router, Switch } from 'react-router-dom';
 import routeConfig from '../../utils/routeConfig';
-import { useAuth } from '../../providers/AuthProvider';
 import routes from '../../utils/routes';
+import { useAuth } from '../../providers/AuthProvider';
 import { history } from '../../utils/history';
 import Loader from '../Loader';
 import Navbar from '../Navbar';
+import './index.css';
 
 function App() {
   const { isAuthenticated } = useAuth();

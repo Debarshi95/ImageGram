@@ -1,17 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useAuth } from '../../providers/AuthProvider';
+import { addComment } from '../../services';
 import './index.css';
-import { addCommentToPost } from '../../firebase';
-import { useAuth } from '../../provider/AuthProvider';
 
 function AddComment({ imageId }) {
-  const [comment, setComment] = React.useState('');
+  const [comment, setComment] = useState('');
   const { user } = useAuth();
 
-  const handleComment = async (e) => {
-    console.log('clicked', { e });
+  const createComment = async (e) => {
     e.preventDefault();
-    await addCommentToPost(imageId, user.uid, comment);
-    setComment('');
+    try {
+      await addComment(imageId, user.uid, comment);
+    } catch (error) {
+      //
+    }
   };
 
   return (
@@ -26,7 +28,7 @@ function AddComment({ imageId }) {
         value={comment}
       />
 
-      <button type="button" onClick={handleComment} disabled={comment === ''}>
+      <button type="button" onClick={createComment} disabled={comment === ''}>
         Post
       </button>
     </div>

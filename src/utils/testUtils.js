@@ -1,6 +1,15 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import { render } from '@testing-library/react';
-import { AuthContext } from '../provider/AuthProvider';
+import React from 'react';
+import { ToastProvider } from 'react-toast-notifications';
+import { AuthContext } from '../providers/AuthProvider';
 
 export const timeout = (delay) => new Promise((res) => setTimeout(res, delay));
-export const renderWithAuthProvider = (Comp, value = {}) =>
-  render(<AuthContext.Provider value={value}>{Comp}</AuthContext.Provider>);
+export const renderWithProvider = (children, { providerProps, ...renderOptions }) => {
+  return render(
+    <AuthContext.Provider {...providerProps}>
+      <ToastProvider>{children}</ToastProvider>
+    </AuthContext.Provider>,
+    renderOptions
+  );
+};
