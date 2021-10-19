@@ -9,10 +9,7 @@
   max-width: 95%;
 }
 .navbar__container a {
-  text-decoration: none;
-  font-weight: 600;
   color: var(--bg-default);
-  font-size: 0.9rem;
 }
 
 .navbar__root .MuiSvgIcon-root {

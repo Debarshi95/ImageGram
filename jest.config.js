@@ -5,6 +5,6 @@ module.exports = {
     '!<rootDir>/coverage/',
     '!<rootDir>/build/',
   ],
-  moduleNameMapper: { '\\.(css|scss)$': '<rootDir>/src/utils/mocks/stylemock.js' },
+  moduleNameMapper: { '\\.(css|scss)$': '<rootDir>/src/utils/__mocks__/stylemock.js' },
   setupFilesAfterEnv: ['<rootDir>/src/setupTests.js'],
 };

@@ -1,4 +1,4 @@
-import firebase from 'firebase/app';
+import Firebase from 'firebase/app';
 import 'firebase/storage';
 import 'firebase/firestore';
 import 'firebase/auth';
@@ -12,54 +12,9 @@ const config = {
   appId: process.env.REACT_APP_API_ID,
 };
 
-if (!firebase.apps.length) {
-  firebase.initializeApp(config);
-}
+const firebase = !Firebase.apps.length ? Firebase.initializeApp(config) : Firebase.app;
 
-const storage = firebase.storage();
-const firestore = firebase.firestore();
-const timeStamp = firebase.firestore.FieldValue.serverTimestamp;
-const auth = firebase.auth();
-console.log({ firebase, firestore });
+export const { serverTimestamp } = Firebase.firestore.FieldValue;
+export const { firestore, storage, auth } = Firebase;
 
-const checkUserNameExists = async (username) => {
-  const res = await firestore.collection('users').where('username', '==', username).get();
-  return res.docs.length > 0;
-};
-
-const saveUser = async (uid, username, fullname, email) => {
-  const res = await firestore.collection('users').doc(uid).set({
-    username,
-    fullname,
-    email,
-    createdAt: timeStamp(),
-  });
-
-  return res;
-};
-
-const updatePostLikes = async (imageId, users) => {
-  await firestore.collection('uploads').doc(imageId).update({
-    likedBy: users,
-  });
-};
-
-const addCommentToPost = async (imageId, userId, comment) => {
-  await firestore.collection('comments').add({
-    image: firestore.collection('uploads').doc(imageId),
-    comment,
-    user: firestore.collection('users').doc(userId),
-    createdAt: timeStamp(),
-  });
-};
-
-export {
-  storage,
-  firestore,
-  timeStamp,
-  auth,
-  saveUser,
-  checkUserNameExists,
-  updatePostLikes,
-  addCommentToPost,
-};
+export default firebase;

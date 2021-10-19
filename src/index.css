@@ -1,5 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
+:root {
+  --color-text-primary: #000;
+  --color-text-secondary: #fff;
+  --color-secondary: #8a2be2;
+  --bg-paper: #fafafa;
+  --bg-default: #fff;
+  --color-error: rgb(207, 24, 24);
+}
 * {
   box-sizing: border-box;
   margin: 0;

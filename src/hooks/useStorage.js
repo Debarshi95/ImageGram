@@ -1,41 +1,47 @@
-import React from 'react';
-import { storage, firestore, timeStamp } from '../firebase';
-import { useAuth } from '../provider/AuthProvider';
+import { useEffect, useState } from 'react';
+import { storage, firestore, serverTimestamp } from '../firebase';
 
-function useStorage(file, caption) {
-  const [progress, setProgress] = React.useState();
-  const [error, setError] = React.useState('');
-  const [url, setUrl] = React.useState('');
-  const { user } = useAuth();
-
-  React.useEffect(() => {
-    if (file !== null) {
-      const uploadTask = storage.ref(`images/${file.name}`).put(file);
+function useStorage(file, caption, userId) {
+  const [progress, setProgress] = useState(null);
+  const [error, setError] = useState('');
+  const [url, setUrl] = useState('');
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    if (file) {
+      setLoading(true);
+      const uploadTask = storage().ref(`uploads/${file.name}`).put(file);
       uploadTask.on(
         'state_changed',
         (snapshot) => {
           setProgress((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
         },
-        (err) => setError(err.message),
-        () => {
-          uploadTask.snapshot.ref.getDownloadURL().then((downloadUrl) => {
-            setUrl(downloadUrl);
-            firestore.collection('uploads').add({
+        (err) => {
+          setError(err.message);
+          setLoading(false);
+        },
+        async () => {
+          const imageUrl = await uploadTask.snapshot.ref.getDownloadURL();
+
+          if (imageUrl) {
+            await firestore().collection('uploads').add({
               caption,
-              url: downloadUrl,
+              imageUrl,
               likedBy: [],
-              user: firestore.collection('users').doc(user.uid),
-              createdAt: timeStamp(),
+              uploadedBy: userId,
+              createdAt: serverTimestamp(),
             });
-          });
+          }
+          setUrl(imageUrl);
+          setLoading(false);
         }
       );
     }
-  }, [file, caption, user]);
+  }, [file, caption, userId]);
   return {
     progress,
     error,
     url,
+    loading,
   };
 }
 

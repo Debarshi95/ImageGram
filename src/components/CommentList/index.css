@@ -1,14 +1,13 @@
 .commentlist__root {
-  padding: 0 16px;
-  padding-bottom: 12px;
+  padding-bottom: 0.7rem;
   word-break: break-all;
 }
 .commentlist__root > p {
   margin: 4px 0;
-  font-size: 13px;
+  font-size: 0.8rem !important;
 }
 
 .commentlist__root > p > span {
   font-weight: 600;
-  font-size: 12px;
+  font-size: 0.8rem;
 }
