@@ -1,0 +1,89 @@
+.upload__root {
+  flex: 1;
+  max-height: calc(100vh - 4rem);
+}
+.upload__container {
+  padding: 0.65rem;
+  margin: 0 auto;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+.upload__container > img {
+  border-radius: 0.2rem;
+  object-fit: fill;
+  margin: 1.25rem 0;
+  width: 100%;
+  max-height: 16rem;
+}
+.upload__progress {
+  display: none;
+}
+.progress__visible {
+  display: block;
+}
+.upload__caption {
+  width: 100%;
+  padding: 0.5rem 0;
+  outline: none;
+  border: none;
+  border-bottom: 0.15rem solid #b8b8b8;
+  font-family: inherit;
+  font-weight: 600;
+  margin-top: 2.5rem;
+}
+
+.upload__btnActions {
+  margin-top: 0.25rem;
+  display: flex;
+  justify-content: end;
+}
+.upload__btnActions > button {
+  padding: 0.25rem 1rem;
+  border-radius: 0.15rem;
+  border-width: 0;
+  outline: none;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.upload__btnActions > button:nth-child(2) {
+  margin-left: 0.8rem;
+  background: transparent;
+  border: 0.15rem solid #b8b8b8;
+}
+
+@media screen and (min-width: 600px) {
+  .upload__container {
+    width: 80%;
+    padding: 1rem;
+  }
+  .upload__container > img {
+    max-height: 18rem;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .upload__container {
+    width: 65%;
+    padding: 1.5rem;
+  }
+
+  .upload__caption > input[type='text'] {
+    font-size: 1.15rem;
+  }
+  .upload__container > img {
+    max-height: 20rem;
+  }
+}
+
+@media screen and (min-width: 922px) {
+  .upload__container {
+    width: 50%;
+    padding: 2rem;
+  }
+  .upload__btnActions > button {
+    padding: 0.4rem 1.45rem;
+    border-radius: 0.25rem;
+  }
+}

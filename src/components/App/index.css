@@ -1,0 +1,16 @@
+.app__root {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  background-color: var(--bg-paper);
+}
+.app__root a {
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.error {
+  color: var(--color-error);
+  font-size: 0.9rem;
+  font-weight: 600;
+}

@@ -1,0 +1,97 @@
+.imagecard__root {
+  display: flex;
+  flex-direction: column;
+  margin: 0.8rem 0;
+  background-color: var(--bg-default);
+  max-width: 32rem;
+}
+
+.imagecard__img {
+  width: 100%;
+  height: 14rem;
+  object-fit: fill;
+  background-color: var(--bg-paper);
+}
+.imagecard__img > img {
+  width: 100%;
+  height: 100%;
+}
+.imagecard__userinfo {
+  padding: 0.5rem 0.65rem;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  min-height: 3rem;
+}
+
+.imagecard__userinfo .MuiAvatar-circular {
+  width: 1.75rem;
+  height: 1.75rem;
+  font-size: 1rem;
+}
+
+.imagecard__root p {
+  font-size: 0.9rem;
+  margin: 0 0.65rem;
+}
+
+.imagecard__stats {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  font-size: 0.9rem;
+}
+.imagecard__stats .MuiIconButton-label {
+  width: 1.7rem;
+  height: 1.7rem;
+}
+.imagecard__stats .MuiIconButton-root {
+  padding: 0.25rem 0.65rem;
+}
+
+.imagecard__caption {
+  font-weight: 600;
+  font-size: 0.85rem !important;
+}
+@media screen and (min-width: 600px) {
+  .imagecard__root {
+    margin: 1.5rem auto;
+    border-radius: 2px;
+    border: 1.8px solid #b8b8b8;
+  }
+  .imagecard__img {
+    height: 17rem;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .imagecard__userinfo {
+    padding: 0.75rem 0.65rem;
+  }
+
+  .imagecard__img {
+    height: 18rem;
+  }
+
+  .imagecard__root p {
+    font-size: 1rem;
+  }
+
+  .imagecard__userinfo .MuiAvatar-circular {
+    width: 1.95rem;
+    height: 1.95rem;
+    font-size: 1rem;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .imagecard__img {
+    height: 20rem;
+  }
+  .imagecard__caption {
+    font-size: 0.9rem !important;
+  }
+}

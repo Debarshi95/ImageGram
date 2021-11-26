@@ -1,0 +1,33 @@
+.addcomment__root {
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  height: 3rem;
+}
+
+.addcomment__root > textarea {
+  border: 0;
+  outline: none;
+  flex: 1;
+  font-family: inherit;
+  resize: none;
+  padding: 0.75rem 0.65rem;
+  height: 100%;
+}
+.addcomment__root > textarea::-webkit-scrollbar {
+  display: none;
+}
+.addcomment__root > button {
+  border: 0;
+  outline: none;
+  color: blueviolet;
+  background: transparent;
+  font-weight: 600;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-family: inherit;
+  font-weight: 600;
+  padding: 0.25rem 1.4rem;
+  border-left: 0.1rem solid #bdbdbd;
+  height: 100%;
+}

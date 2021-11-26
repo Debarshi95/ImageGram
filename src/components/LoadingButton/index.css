@@ -1,0 +1,36 @@
+.loadingButton__root {
+  min-width: 6rem;
+  background-color: var(--color-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.15rem;
+}
+.loadingButton__root .MuiButton-root {
+  color: var(--color-text-secondary);
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.8rem;
+  cursor: pointer;
+  width: 100%;
+}
+.disabled__button {
+  opacity: 0.8;
+}
+.loadingButton__root > button:disabled {
+  cursor: initial;
+}
+.button__uploading {
+  font-size: 0.8rem !important;
+}
+.loadingButton__root .MuiCircularProgress-root {
+  width: 1.75rem !important;
+  height: 1.75rem !important;
+  color: var(--bg-default);
+}
+
+@media screen and (min-width: 768px) {
+  .loadingButton__root {
+    min-width: 7rem;
+  }
+}
