@@ -2,7 +2,7 @@ name: Production Deploy
 
 on:
   push:
-    branches: [master, feat/cd]
+    branches: [master]
 
 jobs:
   build-and-production-deploy:
