@@ -1,44 +1,31 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Avatar, Box, Divider, IconButton } from '@material-ui/core';
+import React, { memo, useEffect, useState, useRef } from 'react';
+import { CardActions, CardContent, Divider, IconButton, Typography } from '@material-ui/core';
 import { FavoriteBorder, FavoriteRounded } from '@material-ui/icons';
 import { useToasts } from 'react-toast-notifications';
-import useIntersectionObserver from '../../hooks/useIntersectionObserver';
 import { useAuth } from '../../providers/AuthProvider';
-import { getUserInfo, updatePostLikes } from '../../services';
+import { updatePostLikes } from '../../services';
 import AddComment from '../AddComment';
 import CommentList from '../CommentList';
+import CardHeader from '../CardHeader';
+import CardMedia from '../CardMedia';
+import useIntersectionObserver from '../../hooks/useIntersectionObserver';
 import './index.css';
 
-function ImageCard({ image }) {
-  const [userInfo, setUserInfo] = useState(null);
+function ImageCard({ post }) {
   const [postLiked, setPostLiked] = useState(false);
-  const imgRef = useRef(null);
   const { user } = useAuth();
   const { addToast } = useToasts();
-  const { visible } = useIntersectionObserver(imgRef);
-
-  // get user asociated with image/post
-  useEffect(() => {
-    getUserInfo(image.uploadedBy)
-      .then((doc) => {
-        setUserInfo({ id: doc.id, ...doc.data() });
-      })
-      .catch(() => {
-        addToast('Some error occurred! Please refresh the page', {
-          autoDismiss: true,
-          appearance: 'error',
-        });
-      });
-  }, [addToast, image.uploadedBy]);
+  const ref = useRef();
+  const { visible } = useIntersectionObserver(ref);
 
   // Set Like button status based on current user
   useEffect(() => {
     if (user) {
-      setPostLiked(image.likedBy.includes(user.uid));
+      setPostLiked(post.likedBy.includes(user.uid));
     } else {
       setPostLiked(false);
     }
-  }, [image.likedBy, user]);
+  }, [post.likedBy, user]);
 
   // Update current user's like/dislike
   const handleLike = async () => {
@@ -49,46 +36,56 @@ function ImageCard({ image }) {
       });
       return;
     }
-
-    if (!image.likedBy.includes(user.uid)) {
-      await updatePostLikes(image.id, [...image.likedBy, user.uid]);
+    const { likedBy, id: postId } = post;
+    if (!likedBy.includes(user.uid)) {
+      await updatePostLikes(postId, [...likedBy, user.uid]);
     } else {
-      const oldUsers = image.likedBy.filter((id) => id !== user.uid);
-      await updatePostLikes(image.id, oldUsers);
+      const oldUsers = likedBy.filter((id) => id !== user.uid);
+      await updatePostLikes(postId, oldUsers);
     }
   };
   return (
     <div className="imagecard__root">
-      <Box className="imagecard__userinfo">
-        <Avatar>{userInfo?.username?.split('')[0].toUpperCase()}</Avatar>
-        <p>{userInfo?.fullname}</p>
-      </Box>
-      <Box ref={imgRef} className="imagecard__img">
-        {visible && <img src={image.imageUrl} alt={image.caption} />}
-      </Box>
-      <Box className="imagecard__stats">
-        <>
-          <IconButton onClick={handleLike}>
-            {postLiked ? <FavoriteRounded color="error" /> : <FavoriteBorder />}
-          </IconButton>
-          <span>
-            {image.likedBy.length}
-            <span>{image.likedBy.length > 1 ? ' likes' : ' like'}</span>
-          </span>
-        </>
-      </Box>
-      <p className="imagecard__caption">{image.caption}</p>
-      <CommentList imageId={image.id} />
-      {user && (
-        <>
-          <Divider />
-          <AddComment imageId={image.id} />
-        </>
-      )}
+      <div ref={ref} className="imagecard__wrapper">
+        {visible && (
+          <>
+            <CardHeader uploadedBy={post.uploadedBy} />
+            <CardMedia url={post.imageUrl} alt={post.caption} />
+            <CardContent className="imagecard__cardcontent">
+              <Typography className="imagecard__caption" variant="subtitle1">
+                {post.caption}
+              </Typography>
+            </CardContent>
+            <CardActions disableSpacing className="imagecard__actions">
+              <IconButton aria-label="like" onClick={handleLike}>
+                {postLiked ? <FavoriteRounded color="error" /> : <FavoriteBorder />}
+              </IconButton>
+
+              <span>
+                {post.likedBy.length}
+                <span>{post.likedBy.length > 1 ? ' likes' : ' like'}</span>
+              </span>
+            </CardActions>
+
+            <CommentList imageId={post.id} />
+            {user && (
+              <>
+                <Divider />
+                <AddComment imageId={post.id} />
+              </>
+            )}
+          </>
+        )}
+      </div>
     </div>
   );
 }
 
 ImageCard.whyDidYouRender = true;
-
-export default ImageCard;
+// function areImagesEqual(prevProps, nextProps) {
+//   return (
+//     prevProps.image.id === nextProps.image.id &&
+//     prevProps.image.likedBy.length === nextProps.image.likedBy.length
+//   );
+// }
+export default memo(ImageCard);
