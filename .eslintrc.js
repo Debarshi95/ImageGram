@@ -22,5 +22,6 @@ module.exports = {
       { devDependencies: ['**/*.{js,jsx}', '**/*.test.{js,jsx}', '**/*.spec.{js,jsx}'] },
     ],
     'prettier/prettier': 'error',
+    'react/jsx-props-no-spreading': ['error', { exceptions: ['input'] }],
   },
 };

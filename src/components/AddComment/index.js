@@ -14,6 +14,7 @@ function AddComment({ imageId }) {
     } catch (error) {
       //
     }
+    setComment('');
   };
 
   return (
