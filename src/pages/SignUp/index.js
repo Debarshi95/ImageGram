@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import './index.css';
 import { Box } from '@material-ui/core';
 import { checkUserNameExists, saveUser, createUserWithEmailAndPassword } from '../../services';
 import routes from '../../utils/routes';
 import LoadingButton from '../../components/LoadingButton';
+import './index.css';
+import Input from '../../components/Input';
 
 function SignUp() {
   const [input, setInput] = useState({
@@ -62,7 +63,7 @@ function SignUp() {
           <p>Sign up to get started</p>
         </Box>
         <form autoComplete="off" className="signup__form">
-          <input
+          <Input
             type="text"
             name="fullname"
             onChange={handleInput}
@@ -70,7 +71,7 @@ function SignUp() {
             aria-label="Fullname"
             value={input.fullname}
           />
-          <input
+          <Input
             type="text"
             name="username"
             onChange={handleInput}
@@ -78,7 +79,7 @@ function SignUp() {
             aria-label="Username"
             value={input.username}
           />
-          <input
+          <Input
             type="email"
             name="email"
             onChange={handleInput}
@@ -86,7 +87,7 @@ function SignUp() {
             aria-label="Email"
             value={input.email}
           />
-          <input
+          <Input
             type="password"
             name="password"
             onChange={handleInput}

@@ -6,7 +6,7 @@
   max-height: 38rem;
 }
 .imagecard__wrapper {
-  min-height: 16rem;
+  min-height: 22rem;
   background-color: var(--bg-default);
 }
 .imagecard__wrapper .MuiIconButton-root {
