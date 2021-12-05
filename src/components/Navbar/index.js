@@ -3,7 +3,6 @@ import { Link, useHistory } from 'react-router-dom';
 import './index.css';
 import {
   Avatar,
-  Box,
   Button,
   Dialog,
   DialogActions,
@@ -81,7 +80,7 @@ function Navbar() {
   };
   return (
     <nav className={`navbar__root ${!isAuthenticated && 'navbar__links'}`}>
-      <Box className="navbar__container">
+      <div className="navbar__container">
         <Link to={routes.home.path}>ImageGram</Link>
         {isAuthenticated ? (
           <div>
@@ -108,7 +107,7 @@ function Navbar() {
             <Link to={routes.signUp.path}>Sign up</Link>
           </div>
         )}
-      </Box>
+      </div>
     </nav>
   );
 }

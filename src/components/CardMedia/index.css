@@ -1,0 +1,16 @@
+.cardmedia__root {
+  width: 100%;
+  height: 15rem;
+  object-fit: fill;
+  background-color: var(--bg-paper);
+}
+.cardmedia__root > img {
+  width: 100%;
+  height: 100%;
+}
+
+@media screen and (min-width: 600px) {
+  .cardmedia__root {
+    height: 18rem;
+  }
+}

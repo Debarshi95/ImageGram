@@ -15,8 +15,8 @@ function App() {
   return (
     <div className="app__root">
       <Router history={history}>
+        <Navbar />
         <Suspense fallback={<Loader />}>
-          <Navbar />
           <Switch>
             {Object.keys(routeConfig).map((route) => {
               const { component: Component, exact, path, isProtected } = routeConfig[route];

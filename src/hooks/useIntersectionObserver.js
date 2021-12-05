@@ -7,20 +7,22 @@ function useIntersectionObserver(target) {
   const handleIntersection = useCallback((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        setVisible(true);
         observer.current.unobserve(entry.target);
+        setVisible(true);
       }
     });
   }, []);
 
   useEffect(() => {
-    const elem = target.current;
+    if (target?.current) {
+      const elem = target.current;
 
-    observer.current = new IntersectionObserver(handleIntersection);
-    observer.current.observe(elem);
+      observer.current = new IntersectionObserver(handleIntersection, { threshold: 0.2 });
+      observer.current.observe(elem);
+    }
 
     return () => {
-      observer.current.disconnect();
+      observer.current?.disconnect();
     };
   }, [handleIntersection, target]);
 
