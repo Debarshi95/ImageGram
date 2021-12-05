@@ -1,6 +1,5 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import { auth } from '../firebase';
-import 'firebase/auth';
+import React, { createContext, useContext, useEffect, useState, useMemo } from 'react';
+import { auth } from '../../firebase';
 
 export const AuthContext = createContext();
 
@@ -14,7 +13,7 @@ function AuthProvider({ children }) {
 
   useEffect(
     () =>
-      auth().onAuthStateChanged((authUser) => {
+      auth.onAuthStateChanged((authUser) => {
         if (authUser) {
           setUser(authUser);
         } else {
@@ -24,7 +23,8 @@ function AuthProvider({ children }) {
     []
   );
 
-  return <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>;
+  const value = useMemo(() => ({ user }), [user]);
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
 export default AuthProvider;
