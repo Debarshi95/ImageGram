@@ -40,8 +40,6 @@ A responsive image sharing web app.
 
 ![Desktop-3](screenshots/desktop_3.png)
 
-![Info](screenshots/info1.png)
-
 <br/>
 
 #### Mobile
