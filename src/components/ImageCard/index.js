@@ -2,6 +2,7 @@ import React, { memo, useEffect, useState, useRef } from 'react';
 import { CardActions, CardContent, Divider, IconButton, Typography } from '@material-ui/core';
 import { FavoriteBorder, FavoriteRounded } from '@material-ui/icons';
 import { useToasts } from 'react-toast-notifications';
+import { areEqual } from 'react-window';
 import { useAuth } from '../../providers/AuthProvider';
 import { updatePostLikes } from '../../services';
 import AddComment from '../AddComment';
@@ -22,8 +23,6 @@ function ImageCard({ post }) {
   useEffect(() => {
     if (user) {
       setPostLiked(post.likedBy.includes(user.uid));
-    } else {
-      setPostLiked(false);
     }
   }, [post.likedBy, user]);
 
@@ -88,4 +87,4 @@ ImageCard.whyDidYouRender = true;
 //     prevProps.image.likedBy.length === nextProps.image.likedBy.length
 //   );
 // }
-export default memo(ImageCard);
+export default memo(ImageCard, areEqual);

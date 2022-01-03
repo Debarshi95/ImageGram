@@ -67,7 +67,7 @@ function Navbar() {
           <Button
             onClick={() => {
               handleClose();
-              auth().signOut();
+              auth.signOut();
             }}
             color="primary"
             autoFocus

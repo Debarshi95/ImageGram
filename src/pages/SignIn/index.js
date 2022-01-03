@@ -4,6 +4,7 @@ import { Box } from '@material-ui/core';
 import LoadingButton from '../../components/LoadingButton';
 import routes from '../../utils/routes';
 import { signInWithEmailAndPassword } from '../../services';
+import Input from '../../components/Input';
 import './index.css';
 
 function SignIn() {
@@ -13,7 +14,9 @@ function SignIn() {
   const history = useHistory();
   const disabled = input.email === '' || input.password === '';
 
-  const handleInput = (e) => setInput((value) => ({ ...value, [e.target.name]: e.target.value }));
+  const handleInput = (e) => {
+    setInput((value) => ({ ...value, [e.target.name]: e.target.value }));
+  };
 
   const handleSignIn = async (e) => {
     e.preventDefault();
@@ -40,7 +43,7 @@ function SignIn() {
           <p>Sign in to continue</p>
         </Box>
         <form autoComplete="off" className="signin__form">
-          <input
+          <Input
             type="email"
             name="email"
             onChange={handleInput}
@@ -48,7 +51,7 @@ function SignIn() {
             aria-label="Email"
             value={input.email}
           />
-          <input
+          <Input
             type="password"
             value={input.password}
             name="password"
@@ -70,7 +73,7 @@ function SignIn() {
           {error && <p className="error signin__error">{error}</p>}
           <p>
             Don&apos;t have an account?
-            <Link to={routes.home.path}>Sign up</Link>
+            <Link to={routes.signUp.path}>Sign up</Link>
           </p>
         </Box>
       </div>

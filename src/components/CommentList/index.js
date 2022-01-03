@@ -7,7 +7,7 @@ function CommentList({ imageId }) {
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
-    const unsub = firestore()
+    const unsub = firestore
       .collection('comments')
       .orderBy('createdAt', 'desc')
       .where('imageId', '==', imageId)
